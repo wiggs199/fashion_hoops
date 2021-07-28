@@ -1,23 +1,10 @@
+  
+from flask import render_template, url_for, flash, redirect
+from blog import app
+from blog.forms import RegistrationForm, LoginForm
+from blog.models import User, Post
 
-from logging import debug
-from typing import DefaultDict
-from flask import Flask,render_template,url_for,flash,redirect
-from wtforms.validators import Email
-from flask_sqlalchemy import SQLAlchemy
-from forms import RegistrationForm,LoginForm
-from models import User,Posts
-
-app = Flask(__name__)
-# Set Secret key to protect against cookies when using forms 
-app.config['SECRET_KEY'] = '9307f719f3ac67ac0b2e25193fb03f93'
-# Specify a relative path from current file
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
-# Database instance 
-db = SQLAlchemy(app)
-
-
-
-
+# dummy data
 posts = [ 
     {
         'author': 'Author',
@@ -56,7 +43,3 @@ def register():
 def login():
     form = LoginForm()                                  #Access to instance RegistrationForm in template
     return render_template('login.html', title='Login', form=form)
-
-
-if __name__ == '__main__' :
-    app.run(debug=True)
